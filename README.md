@@ -1,7 +1,7 @@
 # GroupProject
 Getting To Know Eachother: EzScrumEzGo Edition
 
-Names: 
+Names: Steve, Diya, Paula, Adrian, Mariala
 
 
 Description:
