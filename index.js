@@ -1,33 +1,55 @@
-var http = require('http');
-var url = require('url');
-var dt = require('./datetime');
+const express = require('express')
+const expressHandlebars = require('express-handlebars')
+const app = express()
 
 
-const server = http.createServer((request, response) => {
-    // Write the request to the log. 
-    console.log(request);
 
-    // Standard Hello World.
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write('<h3>Hello World!</h3>')
+//helped https://raddy.co.uk/blog/nodejs-setup-with-html-css-js-ejs/
 
-    // Access funcion from a separate JavaScript module.
-    response.write("The date and time are currently: " + dt.myDateTime() + "<br><br>");
 
-    // Show the url. 
-    response.write("req.url="+request.url+"<br><br>");
+//static files
+app.use(express.static('public'))
 
-    // Suggest adding something tl the url so that we can parse it. 
-    response.write("Consider adding '/test?year=2017&month=July' to the URL.<br><br>");
-    var q = url.parse(request.url, true).query;
-    var txt = q.year + " " + q.month;
-    response.write("txt="+txt);
+// configure Handlebars view engine
+app.engine('handlebars', expressHandlebars({
+    defaultLayout: 'main',
+}))
 
-    // Close the response
-    response.end('<h3>The End.</h3>');
-});
+app.set('view engine', 'handlebars')
+app.set("views", './views')
 
-const port = process.env.PORT || 1337;
-server.listen(port);
+const port = process.env.PORT || 3000;
 
-console.log("Server running at http://localhost:%d", port);
+//webpage routes
+
+//app.get('/', (req, res) => res.render('index'))
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html')
+})
+
+app.get('/adrian', (req, res) => {
+  res.sendFile(__dirname + '/views/adrian-webpage.html')
+})
+
+
+//when it cant find somthing or when there is a error 
+//app.use(express.static(__dirname + '/public'))
+
+/* naming the webpage directly
+app.get('/about', (req, res) => {
+  res.sendFile(__dirname + '/views/about.html')
+})
+*/
+
+// custom 404 page
+app.use((req, res) => {
+    res.status(404)
+    res.render('404')
+  })
+
+//where the websever is being hosted 
+
+app.listen(port, () => console.log(
+    `Express started on http://localhost:${port}; ` +
+    `press Ctrl-C to terminate.`))
