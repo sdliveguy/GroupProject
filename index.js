@@ -3,11 +3,7 @@ const expressHandlebars = require('express-handlebars')
 const app = express()
 
 
-
-//helped https://raddy.co.uk/blog/nodejs-setup-with-html-css-js-ejs/
-
-
-//static files
+//static files or try app.use(express.static(__dirname + '/public'))
 app.use(express.static('public'))
 
 // configure Handlebars view engine
@@ -19,6 +15,7 @@ app.set('view engine', 'handlebars')
 app.set("views", './views')
 
 const port = process.env.PORT || 3000;
+
 
 //webpage routes
 
@@ -32,9 +29,21 @@ app.get('/adrian', (req, res) => {
   res.sendFile(__dirname + '/views/adrian-webpage.html')
 })
 
+app.get('/steve', (req, res) => {
+  res.sendFile(__dirname + '/views/-------.html')
+})
 
-//when it cant find somthing or when there is a error 
-//app.use(express.static(__dirname + '/public'))
+app.get('/diya', (req, res) => {
+  res.sendFile(__dirname + '/views/-----.html')
+})
+
+app.get('/paula', (req, res) => {
+  res.sendFile(__dirname + '/views/-----.html')
+})
+
+app.get('/mariela', (req, res) => {
+  res.sendFile(__dirname + '/views/-----.html')
+})
 
 /* naming the webpage directly
 app.get('/about', (req, res) => {
@@ -49,7 +58,7 @@ app.use((req, res) => {
   })
 
 //where the websever is being hosted 
-
 app.listen(port, () => console.log(
     `Express started on http://localhost:${port}; ` +
     `press Ctrl-C to terminate.`))
+
