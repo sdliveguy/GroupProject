@@ -34,7 +34,7 @@ app.get('/steve', (req, res) => {
 })
 
 app.get('/diya', (req, res) => {
-  res.sendFile(__dirname + '/views/-----.html')
+  res.sendFile(__dirname + '/views/diya.html')
 })
 
 app.get('/paula', (req, res) => {
