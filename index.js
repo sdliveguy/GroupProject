@@ -41,7 +41,7 @@ app.get('/paula', (req, res) => {
 })
 
 app.get('/mariela', (req, res) => {
-  res.sendFile(__dirname + '/views/-----.html')
+  res.sendFile(__dirname + '/views/mariela-webpage.html')
 })
 
 /* naming the webpage directly
