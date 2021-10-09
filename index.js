@@ -2,7 +2,6 @@ const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const app = express()
 
-
 //static files or try app.use(express.static(__dirname + '/public'))
 app.use(express.static('public'))
 
